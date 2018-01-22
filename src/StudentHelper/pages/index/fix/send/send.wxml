@@ -1,0 +1,23 @@
+<!--pages/index/fix/send/send.wxml-->
+<view class="container">
+  <view class="lists">
+    <view class="list">
+      <image src="/images/edit.png" />
+      <text>地点</text>
+      <input type="text" bindinput="positionInput" />
+    </view>
+    <view class="list">
+      <image src="/images/edit.png" />
+      <text>联系方式</text>
+      <input type="number" bindinput="phoneInput" />
+    </view>
+  </view>
+  <view class="introduce">
+    <view class="list">
+      <image src="/images/edit.png" />
+      <text>详情: </text>
+    </view>
+    <textarea bindinput="detailInput" />
+  </view>
+  <button bindtap="send">提交</button>
+</view>

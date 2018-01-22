@@ -1,0 +1,29 @@
+<view>
+    <view class="list" bindtap="nav_to"  data-headlineid="{{lists.headlineid}}">
+      <view class="title">{{lists.title}}</view>
+      <view class="content">{{lists.content}}</view>
+      <view class="list_body clearfloat" catchtap="previewPictures" data-pictures="{{lists.pictures}}">
+        <view class="img_wrap" wx:for="{{lists.pictures}}">
+          <image src="{{item}}" bindtap="previewPicture"></image>
+        </view>
+      </view>
+      <view class="footer">
+        <text>20{{lists.time}}</text>
+        <image src="/images/news_active.png"></image>
+      </view>
+    </view>
+    <view class="blank"></view>
+    <view class="comments">
+        <view class="comment" wx:for="{{comments}}">
+            <image src="https://wx.bingexxx.net/CollegeApp2.4/{{item.icon}}" class="icon"></image>
+            <text class="nickName">{{item.UserNickName}}</text>
+            <text class="time">20{{item.time}}</text>
+            <view class="content" catchtap="comment"  data-commentid="{{item.commentId}}" data-nick="{{item.UserNickName}}">{{item.commentdetail}}</view>
+        </view>
+        
+    </view>
+    <view class="publish">
+        <input placeholder="{{inputValue}}" placeholder-class="placeholder" type="text" value="{{content}}" focus="{{focus}}"  bindinput="bindInput" bindblur="bindblur"/>
+        <text bindtap="publish">发送</text>
+    </view>
+</view>

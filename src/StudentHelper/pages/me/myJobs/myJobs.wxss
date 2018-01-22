@@ -1,0 +1,110 @@
+.tabItems {
+  display: flex;
+}
+
+.tabItems .tab {
+  flex: 1;
+  text-align: center;
+}
+
+.tabItems text {
+  display: block;
+  width: 200rpx;
+  margin: 0 auto;
+  line-height: 90rpx;
+}
+
+.tabItems .active text {
+  color: #0495fe;
+  border-bottom: 5rpx #0495fe solid;
+}
+
+.bg {
+  height: 21rpx;
+  background: #e8e8e8;
+}
+
+swiper {
+  height: 1000rpx;
+}
+
+.lists {
+  padding-bottom: 5rpx;
+}
+
+.list {
+  /* height: 225rpx; */
+  padding: 28rpx 60rpx;
+  position: relative;
+  border-bottom: 1rpx solid #d6d6d6;
+}
+
+.shop_name {
+  /* border-bottom: 1rpx solid #d6d6d6; */
+  line-height: 60rpx;
+  height: 60rpx;
+  font-size: 36rpx;
+}
+
+.introduce {
+  position: relative;
+  padding-left: 142rpx;
+  padding-top: 10rpx;
+  padding-right: 128rpx;
+  font-size: 32rpx;
+}
+
+.introduce_title {
+  position: absolute;
+  left: 0rpx;
+  line-height: 48rpx;
+  height: 48rpx;
+}
+
+.introduce_detail {
+  line-height: 42rpx;
+}
+
+.status {
+  position: absolute;
+  right: 0;
+  top: 20rpx;
+}
+
+.status view {
+  display: inline-block;
+}
+
+.status image {
+  height: 40rpx;
+  width: 40rpx;
+}
+
+.status .status_text {
+  line-height: 42rpx;
+  position: relative;
+  text-indent: 10rpx;
+  top: -10rpx;
+  font-size: 30rpx;
+  color: #d2d2d2;
+}
+.status .active{
+  color: #0495fe !important;
+}
+.time {
+  color: #d2d2d2;
+  font-size: 30rpx;
+  padding-top: 10rpx;
+}
+
+.isfix {
+  color: #0495fe;
+  position: absolute;
+  top: 96rpx;
+  right: 20rpx;
+}
+
+.box {
+  margin-top: 240rpx;
+  display: none;
+}

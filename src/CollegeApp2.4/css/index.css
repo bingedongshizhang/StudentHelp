@@ -1,0 +1,226 @@
+body,html,#app{
+    height: 100%;
+}
+
+.clearfix:after {
+    content: " ";
+    display: block;
+    clear: both;
+    height: 0;
+}
+.clearfix {
+    zoom: 1;
+}
+
+#left{
+    height: 100%;
+    width: 16%;
+    float: left;
+    background: #323232;
+}
+
+.list_header{
+    height: 160px;
+    padding-top: 24px;
+    background: #3F3F3F;
+    text-align: center;
+}
+
+.list_header .icon{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    border: 2px solid #eeeeee;
+    margin: 0 auto;
+    background: url(../img/icon.jpg);
+    background-size: 100%;
+}
+
+.list_header .icon_text{
+    font-size: 20px;
+    color: #ffffff;
+    line-height: 48px;
+}
+.headLines .pictures .picture-wrap{
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+
+#left .list{
+    height: 42px;
+    text-indent: 40px;
+    background: #3F3F3F;
+    color: #7C7C7C;
+    font-weight: bold;
+    line-height: 42px;
+    font-size: 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #444444;
+}
+
+#left .active{
+    background: #3A92D9;
+    color: #ffffff;
+}
+
+#left .list:not(.active):hover{
+    background: #323232;
+    color: #ffffff;
+    /* font-size: 18px; */
+}
+
+#right{
+    height: 100%;
+    float: right;
+    width: 84%;
+}
+
+.headLines h3,.notice h3{
+    margin-top: 0
+}
+
+#right #tool_tar{
+    height: 36px;
+    background: #3F3F3F;
+    color: #7C7C7C;
+    line-height: 36px;
+    font-size: 14px;
+}
+
+#right .tool_item{
+    float: left;
+    width: 80px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#right .tool_item:hover{
+    background: #323232;
+    color: #cccccc;
+}
+
+#class_lists{
+    padding: 50px;
+}
+
+#class_lists tbody tr:hover{
+    background: #f7f7f9;
+    cursor: pointer;
+}
+
+#class_lists td{
+    line-height: 36px;
+}
+
+#addClass{
+    float: left;
+    /* margin-left: 20px; */
+}
+
+#save{
+    float: right;
+    /* margin-right: 20px; */
+}
+
+#info .modal-content,#changePassword .modal-content{
+    width: 400px;
+}
+
+#notice .modal-content{
+    width: 500px;
+    /* left: 100px; */
+}
+
+#info .modal-content .input-group{
+    margin: 10px 0;
+}
+
+#publishHeadLine, #publishNotice{
+    position: fixed;
+    background: #2ca6ff;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 16px;
+    line-height: 60px;
+    cursor: pointer;
+}
+
+#headLine .modal-body{
+    display: flex;
+}
+
+#headLine .left{
+    flex: 1;
+    padding: 10px;
+    border-right: 1px dashed #323232; 
+}
+
+#headLine .right{
+    flex: 1;
+    padding: 10px;
+}
+
+#headLine .right .pic-wrap,#headLine .right .pic-add{
+    float: left;
+    margin: 3px;
+    width: 75px;
+    height: 75px;
+    position: relative;
+}
+
+#headLine .right .fa-trash-o{
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    cursor: pointer;
+    color: #c9302c;
+}
+
+#headLine .right .pic-add{
+    border: 2px dashed #7C7C7C;
+}
+
+#headLine .right .pic-add .fa-upload{
+    font-size: 42px;
+    text-align: center;
+    display: block;
+    line-height: 75px;
+    cursor: pointer;
+}
+
+#headLine .right .pic-wrap{
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#changePassword .input-group{
+    padding: 10px;
+}
+
+#changePassword h6{
+    text-align: center;
+    color: red;
+}
+
+#fileArr{
+    display: none;
+}
+
+.pic-container{
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+    margin: 5px;
+}

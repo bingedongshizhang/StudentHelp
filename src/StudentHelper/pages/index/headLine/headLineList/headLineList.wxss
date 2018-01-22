@@ -1,0 +1,86 @@
+/**index.wxss**/
+#header{
+  height: 200rpx;
+  padding-top: 20rpx;
+  width: 100%;
+  display: flex;
+}
+#header .item{
+  flex: 1;
+  text-align: center;
+}
+#header image{
+  width: 140rpx;
+  height: 140rpx;
+  margin: 0 auto;
+  display: block;
+}
+.bg{
+  height: 21rpx;
+  background: #e8e8e8;
+}
+
+.school-title{
+  height: 48rpx;
+  padding-top: 32rpx; 
+  padding: 30rpx;
+  position: relative;
+}
+.school-title .image{
+  height: 72rpx;
+  width: 72rpx;
+  background: #fcdb12;
+  display: inline-block;
+  border-radius: 6rpx;
+}
+.school-title text{
+  position: absolute;
+  top: 40rpx;
+  padding-left: 20rpx;
+}
+.lists{
+  margin-top: -16rpx;
+}
+.list .title{
+  line-height: 72rpx;
+  padding-left: 24rpx;
+}
+.list .content{
+  line-height: 60rpx;
+  padding: 0 24rpx;
+  text-indent: 2em;
+}
+.list{
+    margin: 30rpx;
+    background: #f8f8f8;
+    box-shadow: 2rpx 5rpx 10rpx #cccccc;
+}
+.list_body{
+    padding-left: 18rpx;
+}
+.list_body image{
+    height: 200rpx;
+    width: 200rpx;
+    padding: 10rpx;
+    float: left;
+}
+.footer{
+  height: 64rpx;
+  padding-top: 12rpx;
+}
+.list .footer text{
+  float: left;
+  color: #a8a8a8;
+  font-size: 32rpx;
+  padding-left: 24rpx;
+}
+.list .footer image{
+  float: right;
+  width: 36rpx;
+  height: 32rpx;
+  padding-right: 28rpx;
+}
+.box{
+  margin-top: 180rpx;
+  display: none;
+}

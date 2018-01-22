@@ -1,0 +1,16 @@
+<view class="container">
+  <view class="">
+    <textarea bindblur="bindTextAreaBlur" placeholder="" bindinput="textarea" />
+    <view class="bg"></view>
+    <view class="pictures">
+      <block wx:for="{{pictures}}" wx:for-item="picture">
+        <image src="{{picture}}" mode="aspectFill" class="picture"></image>
+      </block>
+      <view class="publish" bindtap="choosePicture">
+        <view class="line1"></view>
+        <view class="line2"></view>
+      </view>
+    </view>
+    <button bindtap="send" class="send">发布</button>
+  </view>
+</view>

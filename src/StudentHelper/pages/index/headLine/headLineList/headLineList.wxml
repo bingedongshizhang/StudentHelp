@@ -1,0 +1,42 @@
+<!--index.wxml-->
+<view class="container">
+  <view id="header">
+    <navigator class="item" url="/pages/index/study/study_list/study_list" hover-class="none">
+      <image src="/images/study.png"></image>
+      <text>学霸论坛</text>
+    </navigator>
+    <navigator class="item" url="/pages/index/work/workList/workList" hover-class="none">
+      <image src="/images/work.png"></image>
+      <text>兼职平台</text>
+    </navigator>
+    <navigator class="item" url="/pages/index/fix/index/index" hover-class="none">
+      <image src="/images/fix.png"></image>
+      <text>宿舍维修</text>
+    </navigator>
+  </view>
+  <view class="bg"></view>
+  <view class="school-title">
+    <image src="/images/headlineLogo.png" class="image"></image>
+    <text>校园公告</text>
+  </view>
+  <view class="lists" wx:for="{{lists}}">
+    <view class="list" bindtap="nav_to"  data-headlineid="{{item.headlineid}}">
+      <view class="title">{{item.title}}</view>
+      <view class="content">{{item.content}}</view>
+      <view class="list_body clearfloat" catchtap="previewPictures" data-pictures="{{item.pictures}}">
+        <view class="img_wrap" wx:for="{{item.pictures}}">
+          <image src="{{item}}" bindtap="previewPicture"></image>
+        </view>
+      </view>
+      <view class="footer">
+        <text>20{{item.time}}</text>
+        <image src="/images/news_active.png"></image>
+      </view>
+    </view>
+    
+  </view>
+  <view class="box {{boxShow?'show':''}}">
+    <image src="/images/box.png" />
+    <text>暂无内容</text>
+  </view>
+</view>

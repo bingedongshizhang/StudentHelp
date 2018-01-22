@@ -1,0 +1,44 @@
+<view class="container">
+  <view class="job_list">
+    <view class="job_name">{{jobDetail.title}}</view>
+    <view class="shop_name">{{jobDetail.shopname}}</view>
+    <view class="sort_detail">
+      <view class="position">
+        <image src="/images/position.png"></image>
+        <text>{{jobDetail.detail.position}}</text>
+      </view>
+      <view class="gender">
+        <image src="/images/gender.png"></image>
+        <text>{{jobDetail.detail.gender}}</text>
+      </view>
+    </view>
+    <view class="time">20{{jobDetail.time}}</view>
+    <view class="salary">{{jobDetail.detail.salary}}</view>
+  </view>
+  <view class="bg"></view>
+  <view class="job_introduce">
+    <view class="introduce_title">职位描述</view>
+    <view class="detail">
+      <view class="detail_title">工作内容</view>
+      <view class="detail_detail">{{jobDetail.detail.detail}}</view>
+    </view>
+    <view class="Worktime">
+      <view class="Worktime_title">工作时间</view>
+      <view class="Worktime_detail">{{jobDetail.detail.jobTime}}</view>
+    </view>
+    <view class="other">
+      <view class="other_title">附加内容</view>
+      <view class="other_detail">{{jobDetail.detail.other}}</view>
+    </view>
+  </view>
+  <view class="bottom">
+    <view class="phone" catchtap="call">
+        <image src="/images/phone.png"></image>
+        <view>联系他们</view>
+    </view>
+    <view class="introduce" bindtap="send">
+        <image src="/images/introduce.png"></image>
+        <view>投递简历</view>
+    </view>
+  </view>
+</view>

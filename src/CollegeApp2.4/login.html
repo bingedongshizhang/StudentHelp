@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/login.css">
+    <script src="js/vue.js"></script>
+    <script src="js/axios.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+</head>
+
+<body>
+    <form role="form" id="login_form">
+        <h2 class="title">登录</h2>
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon">账号: </span>
+            <input type="text" class="form-control" v-model="username" placeholder="请输入账号">
+        </div>
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon">密码: </span>
+            <input type="password" class="form-control" v-model="password" placeholder="请输入密码">
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox">记住密码
+            </label>
+        </div>
+        <button type="button" class="btn btn-info btn-lg btn-block" id="login_btn" v-on:click="login">登录</button>
+    </form>
+
+    <div id="mask">
+    </div>
+
+    <script>
+        var app = new Vue({
+
+            el: "#login_form",
+
+            data: {
+                "login_url": "https://wx.bingexxx.net/CollegeApp2.4/LoginAction.action?logintype=3",
+                "username": "18998712132",
+                "password": "10000"
+            },
+            methods: {
+                login: function () {
+                    var _this = this;
+                    $.ajax({
+                        type: 'post',
+                        data: {
+                            username: _this.username,
+                            password: _this.password
+                        },
+                        url: _this.login_url,
+                        contentType: 'application/x-www-form-urlencoded',
+                        success: function (data) {
+                            var data = JSON.parse(data);
+                            if (data.code == 1) {
+                                sessionStorage.setItem('admin', true);
+                                window.location.href = "index.html";
+                            }
+                        },
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        crossDomain: true
+                    });
+
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>

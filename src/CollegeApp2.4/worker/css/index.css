@@ -1,0 +1,124 @@
+body,html,#app{
+    height: 100%;
+}
+
+#left{
+    height: 100%;
+    width: 16%;
+    float: left;
+    background: #323232;
+}
+
+.list_header{
+    height: 160px;
+    padding-top: 24px;
+    background: #3F3F3F;
+    text-align: center;
+}
+
+.list_header .icon{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    border: 2px solid #eeeeee;
+    margin: 0 auto;
+    background: url(../img/icon.jpg);
+    background-size: 100%;
+}
+
+.list_header .icon_text{
+    font-size: 20px;
+    color: #ffffff;
+    line-height: 48px;
+}
+
+#left .list{
+    height: 42px;
+    text-indent: 40px;
+    background: #3F3F3F;
+    color: #7C7C7C;
+    font-weight: bold;
+    line-height: 42px;
+    font-size: 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #444444;
+}
+
+#left .active{
+    background: #3A92D9;
+    color: #ffffff;
+}
+
+#left .list:not(.active):hover{
+    background: #323232;
+    color: #ffffff;
+    /* font-size: 18px; */
+}
+
+#right{
+    height: 100%;
+    float: right;
+    width: 84%;
+}
+
+#right #tool_tar{
+    height: 36px;
+    background: #3F3F3F;
+    color: #7C7C7C;
+    line-height: 36px;
+    font-size: 14px;
+}
+
+#right .tool_item{
+    float: left;
+    width: 80px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#right .tool_item:hover{
+    background: #323232;
+    color: #cccccc;
+}
+
+#class_lists{
+    padding: 50px;
+}
+
+#class_lists tbody tr:hover{
+    background: #f7f7f9;
+    cursor: pointer;
+}
+
+#class_lists td{
+    line-height: 36px;
+}
+
+#addClass{
+    float: left;
+    /* margin-left: 20px; */
+}
+
+#save{
+    float: right;
+    /* margin-right: 20px; */
+}
+
+.modal-content{
+    width: 400px !important;
+    left: 100px;
+}
+
+.modal-content .input-group{
+    margin: 10px 0;
+}
+
+
+#changePassword .input-group{
+    padding: 10px;
+}
+
+#changePassword h6{
+    text-align: center;
+    color: red;
+}

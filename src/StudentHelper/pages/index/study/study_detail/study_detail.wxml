@@ -1,0 +1,58 @@
+<view>
+  <view class="list">
+    <view class="header">
+      <image class="icon" src="{{lists.icon}}"></image>
+      <view class="nickName">{{lists.nick}}</view>
+      <view class="time">20{{lists.time}}</view>
+    </view>
+    <view class="title">{{lists.content}}</view>
+    <view class="list_body clearfloat" catchtap="previewPictures" data-pictures="{{lists.pictures}}">
+      <view class="img_wrap" wx:for="{{lists.pictures}}">
+        <image src="{{item}}" bindtap="previewPicture" data-curPicture="{{item}}"></image>
+      </view>
+
+    </view>
+    <view class="footer">
+      <view class="footer_item">
+        <image src="/images/collect.png" class="{{lists.iscollect?'none':''}}" catchtap="oper" data-code="collected"></image>
+        <image src="/images/collect_active.png" class="{{lists.iscollect?'':'none'}}" catchtap="oper" data-code="uncollected"></image>
+        <text>{{lists.collections}}</text>
+      </view>
+      <view class="footer_item">
+        <image src="/images/news_active.png"></image>
+        <text>{{lists.comments}}</text>
+      </view>
+      <view class="footer_item">
+        <image src="/images/like.png" class="{{lists.islike?'none':''}}" catchtap="oper" data-code="like"></image>
+        <image src="/images/like_active.png" class="{{lists.islike?'':'none'}}" catchtap="oper" data-code="unlike"></image>
+        <text>{{lists.like}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="blank"></view>
+  <view class="comments">
+    <view class="comment" wx:for="{{comments}}">
+      <image src="https://wx.bingexxx.net/CollegeApp2.4/{{item.UserIcon}}" class="icon"></image>
+      <text class="nickName">{{item.UserNickName}}</text>
+      <text class="time">{{item.time}}</text>
+      <view class="content" catchtap="comment" data-commentid="{{item.commentId}}" data-nick="{{item.UserNickName}}">{{item.commentdetail}}</view>
+      <view class="childComments">
+        <view class="commentWrap" wx:for="{{item.commentchaildlist}}">
+          <view class="childComment">{{item.content}}</view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+  <view class="publish">
+    <input placeholder="{{inputValue}}" placeholder-class="placeholder" type="text" focus="{{focus}}" bindinput="bindInput" bindblur="bindblur" value="{{content}}"/>
+    <text bindtap="publish">发布</text>
+  </view>
+  <!--<view class="swiper">
+        <swiper indicator-dots="true">
+            <swiper-item>
+                <image src="/images/test_1.jpg" class="slide-image"/>
+            </swiper-item>
+        </swiper>
+    </view>-->
+</view>

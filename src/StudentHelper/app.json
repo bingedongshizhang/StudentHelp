@@ -1,0 +1,56 @@
+{
+  "pages":[
+    "pages/login/studentLogin/studentLogin",
+    "pages/index/headLine/headLineList/headLineList",
+    "pages/index/headLine/headLineDetail/headLineDetail",
+    "pages/login/index/index",
+    "pages/index/work/send/send",
+    "pages/index/study/send/send",
+    "pages/news/news",
+    "pages/me/index/index",
+    "pages/me/feedback/feedback",
+    "pages/me/data/data",
+    "pages/me/myJobs/myJobs",
+    "pages/me/study_list/study_list",
+    "pages/index/fix/index/index",
+    "pages/index/fix/send/send",
+    "pages/index/study/study_list/study_list",
+    "pages/index/study/study_detail/study_detail",
+    "pages/index/work/workList/workList",
+    "pages/index/work/workDetail/workDetail",
+    "pages/me/information/information"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#0495fe",
+    "navigationBarTitleText": "校园助手",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "borderStyle": "#c6c6c6",
+    "backgroundColor": "#ffffff",
+    "color":"#9f9f9f",
+    "selectedColor": "#0495fe",
+    "position":"bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/headLine/headLineList/headLineList",
+        "iconPath": "images/index.png",
+        "selectedIconPath": "images/index_active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/news/news",
+        "iconPath": "images/news.png",
+        "selectedIconPath": "images/news_active.png",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/me/index/index",
+        "iconPath": "images/me.png",
+        "selectedIconPath": "images/me_active.png",
+        "text":"我"
+      }
+    ]
+  }
+}

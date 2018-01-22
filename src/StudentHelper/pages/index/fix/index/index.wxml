@@ -1,0 +1,66 @@
+<view class="container">
+  <view class="tabItems">
+    <view class="tab {{current==0?'active':''}}" bindtap="tap" data-code="0">
+      <text>正在维系</text>
+    </view>
+    <view class="tab {{current==1?'active':''}}" bindtap="tap" data-code="1">
+      <text>维修完成</text>
+    </view>
+  </view>
+  <view class="bg"></view>
+  <swiper bindchange="swiper" current="{{current}}">
+    <swiper-item>
+      <scroll-view scroll-y style="height: 1000rpx;">
+        <view class="lists">
+          <view class="list" wx:for="{{list1}}">
+            <view class="position">{{item.position}}</view>
+            <view class="detail_text">故障详情:</view>
+            <view class="detail">
+              {{item.fixdetail}}
+            </view>
+            <view class="time">20{{item.time}}</view>
+            <view class="isfix">未维修</view>
+            <view class="woker">维修工: {{item.wokername}}</view>
+            <view class="woker_phone">维修电话: {{item.wokerphone}}</view>
+          </view>
+
+        </view>
+        <view class="box {{boxShow1?'show':''}}">
+          <image src="/images/box.png" />
+          <text>暂无内容</text>
+        </view>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <scroll-view scroll-y style="height: 1000rpx;" id="system">
+        <view class="lists">
+          <view class="list" wx:for="{{list2}}">
+            <view class="position">{{item.position}}</view>
+            <view class="detail_text">故障详情:</view>
+            <view class="detail">
+              {{item.fixdetail}}
+            </view>
+            <view class="time">20{{item.time}}</view>
+            <view class="isfix">已维修</view>
+            <view class="woker">维修工: {{item.wokername}}</view>
+            <view class="woker_phone">维修电话: {{item.wokerphone}}</view>
+          </view>
+        </view>
+        <view class="box {{boxShow2?'show':''}}">
+          <image src="/images/box.png" />
+          <text>暂无内容</text>
+        </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+
+  <navigator url="/pages/index/fix/send/send">
+    <view class="publish">
+      <view class="line1"></view>
+      <view class="line2"></view>
+    </view>
+  </navigator>
+
+  <view class="picture">
+  </view>
+</view>

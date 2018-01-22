@@ -1,0 +1,13 @@
+<view class="container">
+  <image class="avatarUrl" src="{{avatarUrl}}"></image>
+  <view class="login_form">
+    <input type="text" placeholder="请输入账号" value="{{studentid}}" bindinput="idInput" />
+    <input type="password" placeholder="请输入密码" value="{{password}}" bindinput="pwdInput" />
+     <!-- <radio-group class="radio-group" bindchange="radioChange">
+      <label class="radio" wx:for="{{items}}">
+        {{item.name}}  <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+      </label>
+    </radio-group>  -->
+    <button catchtap="login">登录</button>
+  </view>
+</view>

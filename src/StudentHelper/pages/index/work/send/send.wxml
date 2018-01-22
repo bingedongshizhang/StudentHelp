@@ -1,0 +1,32 @@
+<!--pages/index/fix/send/send.wxml-->
+<view class="container">
+  <view class="lists">
+    <view class="list">
+      <image src="/images/edit.png" />
+      <text>姓名</text>
+      <input type="text" value="{{name}}" bindinput="nameInput" />
+    </view>
+    <view class="list">
+      <image src="/images/edit.png" />
+      <text>性别</text>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{type}}">
+        <view class="picker">
+          {{type[index]}}
+        </view>
+      </picker>
+    </view>
+    <view class="list">
+      <image src="/images/edit.png" />
+      <text>手机号码</text>
+      <input type="number" value="{{phone}}" bindinput="phoneInput" />
+    </view>
+  </view>
+  <view class="introduce">
+    <view class="list">
+      <image src="/images/edit.png" />
+      <text>介绍自己</text>
+    </view>
+    <textarea bindinput="detailInput" />
+  </view>
+  <button bindtap="send">投递简历</button>
+</view>

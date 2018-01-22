@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+    <script src="js/vue.js"></script>
+    <script src="js/axios.js"></script>
+    <script type="text/javascript" src="https://wx.bingexxx.net/CollegeApp2.4/js/ajaxfileupload.js"></script>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <div id="left">
+            <div class="list_header">
+                <div class="icon"></div>
+                <div class="icon_text">admin</div>
+            </div>
+            <div class="lists">
+                <div class="list" v-bind:class="{active: wrapLists[0].isShow}" v-on:click="tabChange(0)">校园公告</div>
+                <div class="list" v-bind:class="{active: wrapLists[1].isShow}" v-on:click="tabChange(1)">系统消息</div>
+                <div class="list" v-bind:class="{active: wrapLists[2].isShow}" v-on:click="tabChange(2)">维修审核</div>
+                <div class="list" v-bind:class="{active: wrapLists[3].isShow}" v-on:click="tabChange(3)">商家审核</div>
+                <div class="list" v-bind:class="{active: wrapLists[4].isShow}" v-on:click="tabChange(4)">意见反馈</div>
+            </div>
+
+        </div>
+        <div id="right">
+            <div id="tool_tar">
+                <div class="tool_item" v-on:click="changePassword">密码修改</div>
+                <div class="tool_item" v-on:click="logout">退出登录</div>
+            </div>
+
+            <div id="wrap">
+                <div id="wrap1" v-show="wrapLists[0].isShow">
+                    <div id="class_lists">
+                        <div class="well well-lg" v-for="(item,index) in wrapLists[0].initData">
+                            <div class="headLines">
+                                <h3>{{item.title}}</h3>
+                                <h5>{{item.content}}</h5>
+                                <div class="pictures">
+                                    <div class="pic-container" v-for="(item,index) in item.pictures">
+                                        <div class="picture-wrap" v-bind:style="{ backgroundImage: item}"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div id="wrap2" v-show="wrapLists[1].isShow">
+                    <div id="class_lists">
+                        <div class="well well-lg" v-for="(item,index) in wrapLists[1].initData">
+                            <div class="notice">
+                                <h3 v-text="item.title"></h3>
+                                <h4 v-text="item.content"></h4>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="wrap3" v-show="wrapLists[2].isShow">
+                    <div id="class_lists">
+                        <table class="table table-bordered">
+                            <h2>维修审核</h2>
+                            <thead>
+                                <tr class="success">
+                                    <th>姓名</th>
+                                    <th>联系方式</th>
+                                    <th>E-mail</th>
+                                    <th>注册时间</th>
+                                    <th>审核状态</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(item,index) in wrapLists[2].initData">
+                                    <td v-text="item.name"></td>
+                                    <td v-text="item.phone"></td>
+                                    <td v-text="item.email"></td>
+                                    <td>20{{item.registertime}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger" v-show="!item.status" v-on:click="pass(item.phone,1,1,index)">未审核</button>
+                                        <button type="button" class="btn btn-info" v-show="item.status" v-on:click="pass(item.phone,1,0,index)">已审核</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="wrap4" v-show="wrapLists[3].isShow">
+                    <div id="class_lists">
+                        <table class="table table-bordered">
+                            <h2>商家审核</h2>
+                            <thead>
+                                <tr class="success">
+                                    <th>商店名称</th>
+                                    <th>店主姓名</th>
+                                    <th>联系方式</th>
+                                    <th>E-mail</th>
+                                    <th>注册时间</th>
+                                    <th>审核状态</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(item,index) in wrapLists[3].initData">
+                                    <td v-text="item.schoolname"></td>
+                                    <td v-text="item.name"></td>
+                                    <td v-text="item.phone"></td>
+                                    <td v-text="item.email"></td>
+                                    <td>20{{item.registertime}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger" v-show="!item.status" v-on:click="pass(item.phone,2,1,index)">未审核</button>
+                                        <button type="button" class="btn btn-info" v-show="item.status" v-on:click="pass(item.phone,2,0,index)">已审核</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="wrap5" v-show="wrapLists[4].isShow">
+                    <div id="class_lists">
+                        <div class="well well-lg" v-for="(item,index) in wrapLists[4].initData">{{item.content}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="publishHeadLine" v-if="position==0" data-toggle="modal" data-target=".bs-example-modal-lg">
+                发 布
+            </div>
+
+            <div id="publishNotice" v-if="position==1" v-on:click="publishNotice">
+                发 布
+            </div>
+
+            <form id="fileArr" method="post" enctype="multipart/form-data">
+                <input type="text" name="type" value="hlpic" />
+                <input type="file" id="file" name="file" value="上传文件" />
+            </form>
+
+
+        </div>
+
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="infoLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="infoLabel">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>操作成功</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
+
+        <!-- 模态框（发布校园公告） -->
+        <div class="modal fade bs-example-modal-lg" id="headLine" tabindex="-1" role="dialog" aria-labelledby="headLineLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="headLineLabel">发布校园公告</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="left">
+                            <div class="form-group">
+                                <label for="title" class="control-label">标题</label>
+                                <div>
+                                    <input type="text" class="form-control" id="title" v-model="title">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="content" class="control-label">正文</label>
+                                <div>
+                                    <textarea class="form-control" rows="5" id="content" v-model="content"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="right-header">
+                                <label for="content" class="control-label">添加图片</label>
+                            </div>
+                            <div class="pics" class="clearfix">
+                                <div class="pic-container" v-for="(item,index) in picUrl">
+                                    <div class="pic-wrap" v-bind:style="{ backgroundImage: item}">
+                                        <i class="fa fa-trash-o fa-2x" v-on:click="picDel(index)"></i>
+                                    </div>
+                                </div>
+
+                                <div class="pic-container">
+                                    <div class="pic-add">
+                                        <i class="fa fa-upload" v-on:click="picAdd"></i>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="publishHeadLine">发布</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
+
+        <!-- 模态框（发布系统通知） -->
+        <div class="modal fade bs-example-modal-sm" id="notice" tabindex="-1" role="dialog" aria-labelledby="headLineLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="headLineLabel">发布系统通知</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="title" class="control-label">标题</label>
+                            <div>
+                                <input type="text" class="form-control" id="title" v-model="title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="content" class="control-label">正文</label>
+                            <div>
+                                <textarea class="form-control" rows="5" id="content" v-model="content"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="surePublishNotice">发布</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
+
+        <div class="modal fade bs-example-modal-sm" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="headLineLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="headLineLabel">修改密码</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h6>{{info}}</h6>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3"> 原 密 码 : </span>
+                            <input type="password" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="oldPassword">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3"> 新 密 码 : </span>
+                            <input type="password" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newPassword">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">再次确认: </span>
+                            <input type="password" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="surePassword">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" v-on:click="sureChange">确认修改</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
+
+    </div>
+</body>
+<script>
+    var app = new Vue({
+
+        el: "#app",
+
+        data: {
+            'wrapLists': [
+                {
+                    'isShow': true,
+                    'initData': {}
+                },
+                {
+                    'isShow': false,
+                    'initData': {}
+                },
+                {
+                    'isShow': false,
+                    'initData': {}
+                },
+                {
+                    'isShow': false,
+                    'initData': {}
+                },
+                {
+                    'isShow': false,
+                    'initData': {}
+                }
+            ],
+            position: 0,
+
+            title: "",
+            content: "",
+
+            oldPassword: "",
+            newPassword: "",
+            surePassword: "",
+            info: "",
+            picList: [],
+            picUrl: []
+
+        },
+        methods: {
+            tabChange: function (v) {
+                for (var i = 0; i < this.wrapLists.length; i++) {
+                    this.wrapLists[i].isShow = false;
+                }
+                this.wrapLists[v].isShow = true;
+                this.position = v;
+                if (v == 0) {
+                    this.loadWrap1();
+                } else if (v == 1) {
+                    this.loadWrap2();
+                } else if (v == 2) {
+                    this.loadWrap3();
+                } else if (v == 3) {
+                    this.loadWrap4();
+                } else if (v == 4) {
+                    this.loadWrap5();
+                }
+            },
+            loadWrap1: function () {
+                var _this = this;
+                $.ajax({
+                    type: 'get',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/GetHeadLineAction.action?type=outline',
+                    success: function (data) {
+                        var data = JSON.parse(data)
+                        console.log(data)
+                        if(!data.lists){
+                            _this.wrapLists[0].initData = [];
+                            return;
+                        }
+                        var lists = data.lists;
+                        if (lists.time) {
+                            lists = [];
+                            lists.push(data.lists)
+                            _this.wrapLists[0].initData = lists;
+                        }
+                        for (var i = 0; i < lists.length; i++) {
+                            var picList = [];
+                            var n = 1;
+                            for (var key in lists[i].pictures) {
+                                picList.push(lists[i].pictures['url'+n])
+                                n++;
+                            }
+                            lists[i].pictures = picList;
+                            for (var j = 0; j < lists[i].pictures.length; j++) {
+                                var url = 'url(' + 'https://wx.bingexxx.net/CollegeApp2.4/' + lists[i].pictures[j] + ')'
+                                lists[i].pictures[j] = url;
+                            }
+                        }
+                        console.log(lists)
+                        _this.wrapLists[0].initData = lists;
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            },
+            loadWrap2: function () {
+                var _this = this;
+                $.ajax({
+                    type: 'get',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/MessageAction.action?type=informget',
+                    success: function (data) {
+                        var data = JSON.parse(data)
+                        if (data.lists.time) {
+                            var lists = [];
+                            lists.push(data.lists)
+                            _this.wrapLists[1].initData = lists;
+                        } else {
+                            _this.wrapLists[1].initData = data.lists;
+                        }
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+
+            },
+            loadWrap3: function () {
+                var _this = this;
+                $.ajax({
+                    type: 'get',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/AdminAction.action?type=show&usertype=woker',
+                    success: function (data) {
+                        var data = JSON.parse(data)
+                        console.log(data);
+                        if (data.lists.email) {
+                            var lists = [];
+                            lists.push(data.lists)
+                            _this.wrapLists[2].initData = lists;
+                        } else {
+                            _this.wrapLists[2].initData = data.lists;
+                        }
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+
+            },
+            loadWrap4: function () {
+                var _this = this;
+                $.ajax({
+                    type: 'get',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/AdminAction.action?type=show&usertype=seller',
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        console.log(data);
+                        if (data.lists.email) {
+                            var lists = [];
+                            lists.push(data.lists)
+                            _this.wrapLists[3].initData = lists;
+                        } else {
+                            _this.wrapLists[3].initData = data.lists;
+                        }
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            },
+            loadWrap5: function () {
+                var _this = this;
+                $.ajax({
+                    type: 'get',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/MessageAction.action?type=adviceget',
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        console.log(data)
+                        if (data.lists.adviceid) {
+                            var lists = [];
+                            lists.push(data.lists)
+                            _this.wrapLists[4].initData = lists;
+                        } else {
+                            _this.wrapLists[4].initData = data.lists;
+                        }
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            },
+            pass: function (phone, type, status, index) {
+                var _this = this;
+                var pass_url = 'https://wx.bingexxx.net/CollegeApp2.4/AdminAction.action?type=' + (status ? 'pass' : 'nopass') + '&usertype=';
+                if (type == 1) {
+                    pass_url += 'woker&phone=' + phone;
+                    status = this.wrapLists[2].initData[index].status;
+                } else if (type == 2) {
+                    pass_url += 'seller';
+                    status = this.wrapLists[3].initData[index].status;
+                }
+                $.ajax({
+                    type: 'get',
+                    url: pass_url,
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        if (data.code == 1) {
+                            $('#info').modal('show');
+                            type = type == 1 ? 2 : 3;
+                            _this.wrapLists[type].initData[index].status = !status;
+                        } else {
+
+                        }
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            },
+
+            changePassword: function () {
+                this.newPassword = '';
+                this.oldPassword = '';
+                this.info = '';
+                this.surePassword = '';
+                $('#changePassword').modal('show');
+            },
+
+            publishNotice: function () {
+                $('#notice').modal('show');
+            },
+
+            surePublishNotice: function () {
+                var _this = this;
+                $.ajax({
+                    type: 'Post',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/MessageAction.action',
+                    data: {
+                        "title": _this.title,
+                        "content": _this.content,
+                        "type": "informsend"
+                    },
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        console.log(data)
+                        if (data.code == 1) {
+                            _this.title = '';
+                            _this.content = '';
+                            _this.loadWrap2();
+                        } else {
+
+                        }
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            },
+
+            sureChange: function () {
+                var _this = this;
+                if (this.newPassword != this.surePassword) {
+                    this.info = "两次输入的密码不一样";
+                    return;
+                }
+                var _this = this;
+                $.ajax({
+                    type: 'Post',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/MesChangeAction.action?changetype=schooladminchange',
+                    data: {
+                        "surepassword": _this.oldPassword,
+                        "password": _this.newPassword
+                    },
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        console.log(data)
+                        if (data.code == 1) {
+                            alert('修改成功');
+                            $('#changePassword').modal('hide');
+                        } else {
+                            _this.info = "修改失败";
+                        }
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            },
+            publishHeadLine: function () {
+                var _this = this;
+                var pictures = {};
+                for (var i = 0; i < this.picList.length; i++) {
+                    pictures['file' + (i + 1)] = this.picList[i];
+                }
+                pictures = JSON.stringify(pictures)
+                console.log(pictures);
+                $.ajax({
+                    type: 'Post',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/BaseHeadLineAction.action?type=send',
+                    data: {
+                        title: _this.title,
+                        content: _this.content,
+                        pictures: pictures
+                    },
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        console.log(data)
+                        if (data.code == 1) {
+                            _this.title = '';
+                            _this.content = '';
+                            _this.pictures = '';
+                            _this.loadWrap1();
+                        } else {
+
+                        }
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            },
+            picAdd: function () {
+                $("#file").trigger("click");
+                var _this = this;
+                // $('#file').replaceWith('<input type="file" name="file" id="file" />');
+                $("#file").change(function () {
+                    var file = new FormData($('#fileArr')[0]);
+                    $.ajax({
+                        type: "post",
+                        url: "https://wx.bingexxx.net/CollegeApp2.4/WxUpLoadAction.action",
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: file,
+                        dataType: "json",
+                        success: function (data) {
+                            _this.picList.push(data.code);
+                            var url = 'url(' + 'https://wx.bingexxx.net/CollegeApp2.4/' + data.code + ')';
+                            _this.picUrl.push(url);
+                            $('#file').replaceWith('<input type="file" name="file" id="file" />');
+                        },
+                        error: function (data) {
+
+                        },
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        crossDomain: true
+                    });
+                })
+
+            },
+            picDel: function (index) {
+                console.log(index)
+                this.picList.splice(index, 1);
+                this.picUrl.splice(index, 1);
+            },
+            logout: function(){
+                $.ajax({
+                    type: 'get',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/LoginAction.action?logintype=5',
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        if(data.code == 1){
+                            sessionStorage.admin = false;
+                            window.location.href = "login.html";
+                        }
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            }
+        },
+        created: function () {
+            this.loadWrap1();
+        }
+    })
+    if (sessionStorage.admin == 'false') {
+        window.location.href = "login.html";
+    }
+</script>
+
+</html>

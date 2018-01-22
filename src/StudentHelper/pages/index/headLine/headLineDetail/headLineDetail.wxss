@@ -1,0 +1,122 @@
+.lists{
+  margin-top: -16rpx;
+}
+.list .title{
+  line-height: 72rpx;
+  padding-left: 24rpx;
+}
+.list .content{
+  line-height: 60rpx;
+  padding: 0 24rpx;
+  text-indent: 2em;
+}
+.list{
+    margin: 30rpx;
+    background: #f8f8f8;
+    box-shadow: 2rpx 5rpx 10rpx #cccccc;
+}
+.list_body{
+    padding-left: 18rpx;
+}
+.list_body image{
+    height: 200rpx;
+    width: 200rpx;
+    padding: 10rpx;
+    float: left;
+}
+.footer{
+  height: 64rpx;
+  padding-top: 12rpx;
+}
+.list .footer text{
+  float: left;
+  color: #a8a8a8;
+  font-size: 32rpx;
+  padding-left: 24rpx;
+}
+.list .footer image{
+  float: right;
+  width: 36rpx;
+  height: 32rpx;
+  padding-right: 28rpx;
+}
+.blank{
+    height: 24rpx;
+    background: #e8e8e8;
+}
+.comments{
+    padding-bottom: 100rpx;
+}
+.comment{
+    position: relative;
+    margin: 0 28rpx;
+    border-bottom: 1rpx solid #d6d6d6;
+}
+.comment .icon{
+    position: absolute;
+    top: 15rpx;
+    height: 75rpx;
+    width: 75rpx;
+    border-radius: 50%; 
+}
+.comment .nickName{
+    position: absolute;
+    left: 96rpx;
+    top: 30rpx;
+    color: #5e83b7;
+}
+.comment .time{
+    position: absolute;
+    right: 0rpx;
+    top: 32rpx;
+    color: #b9b9b9;
+    font-size: 32rpx;
+}
+.comment .content{
+    padding: 90rpx 0 10rpx 96rpx;
+    font-size: 32rpx;
+}
+.publish{
+    z-index: 3;
+    position: fixed;
+    width: 100%;
+    padding: 0 28rpx;
+    bottom: 0;
+    background: #ffffff;
+    display: flex;
+}
+input{
+    height: 100rpx;
+    font-size: 32rpx;
+    line-height: 100rpx;
+    flex: 5;
+    background: #ffffff;
+}
+.placeholder{
+    background: #a8a8a8;
+    background: #ffffff;
+}
+.publish text{
+    flex: 1;
+    height: 100rpx;
+    font-size: 32rpx;
+    line-height: 100rpx;
+    color: #0495fe;
+}
+swiper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #000000;
+}
+swiper-item{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 800rpx;
+}
+.slide-image{
+    vertical-align: middle;
+    width: 100%;
+}

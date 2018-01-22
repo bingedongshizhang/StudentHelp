@@ -1,0 +1,99 @@
+.list{
+    margin: 30rpx;
+    background: #f8f8f8;
+    box-shadow: 2rpx 5rpx 10rpx #cccccc;
+}
+.header{
+    height: 135rpx;
+    position: relative;
+}
+.header .icon{
+    position: absolute;
+    top: 30rpx;
+    left: 28rpx;
+    height: 92rpx;
+    width: 92rpx;
+    border-radius: 50%; 
+}
+.header .nickName{
+    position: absolute;
+    left: 138rpx;
+    top: 36rpx;
+}
+.header .time{
+    position: absolute;
+    left: 138rpx;
+    top: 78rpx;
+    font-size: 32rpx;
+    color: #a8a8a8;
+}
+.title{
+    max-height: 120rpx;
+    margin-top: 8rpx;
+    padding: 0 28rpx;
+}
+.list_body{
+    padding-left: 18rpx;
+}
+.list_body image{
+    height: 200rpx;
+    width: 200rpx;
+    padding: 10rpx;
+    float: left;
+}
+.footer{
+    height: 75rpx;
+    display: flex;
+}
+.footer_item{
+    flex: 1;
+    text-align: center;
+    padding-top: 16rpx;
+}
+.footer_item image{
+    width: 36rpx;
+    height: 32rpx;
+    margin-bottom: -3rpx;
+}
+.footer_item text{
+    font-size: 32rpx;
+    line-height: 32rpx;
+    padding-left: 12rpx;
+}
+
+.publish{
+    position: fixed;
+    bottom: 180rpx;
+    right: 72rpx;
+    background: #2ca6ff;
+    height: 128rpx;
+    width: 128rpx;
+    border-radius: 50%;
+}
+.line1,.line2{
+    position: absolute;
+    background: #ffffff;
+    border-radius: 4rpx;
+}
+.line1{
+    height: 72rpx;
+    width: 8rpx;
+    top: 30rpx;
+    left: 62rpx;
+}
+.line2{
+    width: 72rpx;
+    height: 8rpx;
+    left: 30rpx;
+    top: 62rpx;
+}
+.none{
+  display: none;
+}
+.show{
+  display: block !important;
+}
+.box{
+  margin-top: 320rpx;
+  display: none;
+}

@@ -1,0 +1,84 @@
+/* pages/me/me.wxss */
+
+#header {
+  height: 200rpx;
+  position: relative;
+}
+
+#avatarUrl {
+  position: absolute;
+   border-radius: 50%; 
+  width: 120rpx;
+  height: 120rpx;
+  top: 40rpx;
+  left: 40rpx;
+}
+
+#nickName {
+  position: absolute;
+  top: 80rpx;
+  left: 180rpx;
+  font-size: 36rpx;
+}
+
+#signature {
+  position: absolute;
+  top: 100rpx;
+  left: 180rpx;
+  font-size: 32rpx;
+}
+
+.bg {
+  height: 21rpx;
+  background: #e8e8e8;
+}
+
+#myOperate {
+  height: 200rpx;
+  display: flex;
+}
+
+#myOperate .item {
+  text-align: center;
+  flex: 1;
+}
+
+#myOperate .item image {
+  width: 120rpx;
+  height: 120rpx;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  /* border-radius: 50%; */
+}
+
+#myOperate .item text{
+  font-size: 28rpx;
+}
+
+#operateItems .item{
+  height: 100rpx;
+  position: relative;
+}
+
+#operateItems .item image{
+  position: absolute;
+  /* border-radius: 50%; */
+  width: 56rpx;
+  margin: 0 5rpx;
+  height: 66rpx;
+  top: 15rpx;
+  left: 15rpx;
+}
+
+#operateItems .item text{
+  display: block;
+  line-height: 100rpx;
+  margin-left: 100rpx;
+  border-bottom: 1rpx solid #e8e8e8;
+}
+
+.feedback image,.about image{
+  width: 66rpx !important;
+  height: 66rpx !important;
+}

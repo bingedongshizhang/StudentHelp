@@ -1,0 +1,36 @@
+/**app.wxss**/
+.container {
+
+} 
+.clearfloat:after{
+    display:block;
+    clear:both;
+    content:"";
+    visibility:hidden;
+    height:0;
+}
+.clearfloat{
+    zoom:1
+}
+
+.bg{
+  height: 21rpx;
+  background: #e8e8e8;
+}
+
+.show{
+  display: block !important;
+}
+.box image{
+  display: block;
+  width: 400rpx;
+  height: 300rpx;
+  margin: 0 auto;
+}
+.box text{
+  display: block;
+  text-align: center;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #666666;
+}

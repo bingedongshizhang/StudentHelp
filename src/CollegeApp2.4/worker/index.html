@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/index.css" rel="stylesheet">
+    <script src="js/vue.js"></script>
+    <script src="js/axios.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <div id="left">
+            <div class="list_header">
+                <div class="icon"></div>
+                <div class="icon_text">维修管理</div>
+            </div>
+            <div class="lists">
+                <div class="list" v-bind:class="{active: isShow==0}" v-on:click="tabChange(0)">全部维修</div>
+                <div class="list" v-bind:class="{active: isShow==1}" v-on:click="tabChange(1)">我的订单</div>
+                <div class="list" v-bind:class="{active: isShow==2}" v-on:click="tabChange(2)">已维修</div>
+            </div>
+
+        </div>
+        <div id="right">
+            <div id="tool_tar">
+                <div class="tool_item" v-on:click="changePassword">密码修改</div>
+                <div class="tool_item" v-on:click="logout">退出登录</div>
+            </div>
+
+            <div id="wrap">
+                <div id="wrap1" v-show="isShow==0">
+                    <div id="class_lists">
+                        <table class="table table-bordered">
+                            <h2>全部维修</h2>
+                            <thead>
+                                <tr class="success">
+                                    <th>姓名</th>
+                                    <th>联系方式</th>
+                                    <th>故障点</th>
+                                    <th>报修时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(item,index) in fixList" v-on:click="showDetail(item.fixdetail)">
+                                    <td v-text="item.username"></td>
+                                    <td v-text="item.userphone"></td>
+                                    <td v-text="item.position"></td>
+                                    <td>20{{item.time}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-info" v-on:click.stop="order(item.fixid)">接单</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="wrap2" v-show="isShow==1">
+                    <div id="class_lists">
+                        <table class="table table-bordered">
+                            <h2>我的订单</h2>
+                            <thead>
+                                <tr class="success">
+                                    <th>姓名</th>
+                                    <th>联系方式</th>
+                                    <th>故障点</th>
+                                    <th>报修时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(item,index) in fixList" v-on:click="showDetail(item.fixdetail)">
+                                    <td v-text="item.username"></td>
+                                    <td v-text="item.userphone"></td>
+                                    <td v-text="item.position"></td>
+                                    <td>20{{item.time}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-info" v-on:click.stop="fix(item.fixid)">确定维修</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="wrap1" v-show="isShow==2">
+                    <div id="class_lists">
+                        <table class="table table-bordered">
+                            <h2>已维修</h2>
+                            <thead>
+                                <tr class="success">
+                                    <th>姓名</th>
+                                    <th>联系方式</th>
+                                    <th>故障点</th>
+                                    <th>报修时间</th>
+                                    <th>维修时间</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(item,index) in fixList" v-on:click.stop="showDetail(item.fixdetail)">
+                                    <td v-text="item.username"></td>
+                                    <td v-text="item.userphone"></td>
+                                    <td v-text="item.position"></td>
+                                    <td>{{item.time}}</td>
+                                    <td>{{item.fixtime}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="infoLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="infoLabel">维修详情</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div v-text="modalText"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
+
+        <div class="modal fade bs-example-modal-sm" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="headLineLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="headLineLabel">修改密码</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h6>{{info}}</h6>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3"> 原 密 码 : </span>
+                            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="oldPassword">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3"> 新 密 码 : </span>
+                            <input type="password" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newPassword">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">再次确认: </span>
+                            <input type="password" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="surePassword">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" v-on:click="sureChange">确认修改</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
+
+    </div>
+</body>
+<script>
+    var app = new Vue({
+
+        el: "#app",
+
+        data: {
+            'oldPassword': "",
+            'info': "",
+            'newPassword': "",
+            'surePassword': "",
+
+            'fixList': {},
+            'isShow': 0,
+            'modalText': ''
+        },
+        methods: {
+            tabChange: function (v) {
+                this.isShow = v;
+                if (v == 0) {
+                    this.loadWrap1();
+                } else if (v == 1) {
+                    this.loadWrap2();
+                } else if (v == 2) {
+                    this.loadWrap3();
+                }
+            },
+            loadWrap1: function () {
+                var _this = this;
+                $.ajax({
+                    type: 'get',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/FixAction.action?type=all&isfix=0',
+                    success: function (data) {
+                        var data = JSON.parse(data)
+                        if (data.listcount == 1) {
+                            var list = [];
+                            list.push(data.lists);
+                            data.lists = list;
+                        }
+                        var phone = sessionStorage.getItem('phone');
+                        var list = [];
+                        for (var index in data.lists) {
+                            if (data.lists[index].wokerphone == "") {
+                                list.push(data.lists[index]);
+                            }
+                        }
+                        for(var i=0;i<list.length;i++){
+                            console.log(list[i])
+                            var detail = list[i].fixdetail;
+                            detail = JSON.parse(detail);
+                            list[i].fixdetail = detail.detail;
+                            list[i].userphone = detail.phone;
+                        }
+                        console.log(data)
+                        _this.fixList = list;
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+
+            },
+            loadWrap2: function () {
+                var _this = this;
+                $.ajax({
+                    type: 'get',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/FixAction.action?type=woker&isfix=0&wokerid=17876477393',
+                    success: function (data) {
+                        var data = JSON.parse(data)
+                        if (data.listcount == 1) {
+                            var list = [];
+                            list.push(data.lists);
+                            data.lists = list;
+                        }
+                        console.log(data)
+                        _this.fixList = data.lists;
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+
+            },
+            loadWrap3: function () {
+                var _this = this;
+                $.ajax({
+                    type: 'get',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/FixAction.action?type=woker&isfix=1&wokerid=17876477393&start=0&length=100',
+                    success: function (data) {
+                        var data = JSON.parse(data)
+                        if (data.listcount == 1) {
+                            var list = [];
+                            list.push(data.lists);
+                            data.lists = list;
+                        }
+                        console.log(data)
+                        _this.fixList = data.lists;
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+
+            },
+            order: function (fixid) {
+                var _this = this;
+                $.ajax({
+                    type: 'post',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/FixAction.action?type=getorder&fixid=' + fixid,
+                    success: function (data) {
+                        console.log(data)
+                        var data = JSON.parse(data)
+                        _this.loadWrap1();
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            },
+            fix: function (fixid) {
+                var _this = this;
+                $.ajax({
+                    type: 'get',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/FixAction.action?type=sureorder&fixid=' + fixid,
+                    success: function (data) {
+                        console.log(data)
+                        if (data.listcount == 1) {
+                            var list = [];
+                            list.push(data.lists);
+                            data.lists = list;
+                        }
+                        var data = JSON.parse(data)
+                        _this.loadWrap2();
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            },
+            showDetail: function (fixdetail) {
+                this.modalText = fixdetail;
+                $('#info').modal('show');
+            },
+            changePassword: function () {
+                this.newPassword = '';
+                this.oldPassword = '';
+                this.info = '';
+                this.surePassword = '';
+                $('#changePassword').modal('show');
+            },
+            sureChange: function () {
+                var _this = this;
+                if (this.newPassword != this.surePassword) {
+                    this.info = "两次输入的密码不一样";
+                    return;
+                }
+                var _this = this;
+                $.ajax({
+                    type: 'Post',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/MesChangeAction.action?changetype=wokerchange',
+                    data: {
+                        "surepassword": _this.oldPassword,
+                        "password": _this.newPassword
+                    },
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        console.log(data)
+                        if (data.code == 1) {
+                            alert('修改成功');
+                            $('#changePassword').modal('hide');
+                        } else {
+                            _this.info = "修改失败";
+                        }
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            },
+            logout: function () {
+                $.ajax({
+                    type: 'get',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/LoginAction.action?logintype=5',
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        if (data.code == 1) {
+                            sessionStorage.worker = false;
+                            window.location.href = "login.html";
+                        }
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            }
+        },
+        created: function () {
+            if (sessionStorage.worker == 'false') {
+                window.location.href = "login.html";
+                return;
+            }
+            this.loadWrap1();
+        },
+        filters: {
+            timeFilter: function (value) {
+                console.log(1)
+                return "";
+            }
+        }
+    })
+
+</script>
+
+</html>

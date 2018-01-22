@@ -1,0 +1,13 @@
+<!--pages/login/index/index.wxml-->
+<view class="container">
+  <image class="avatarUrl" src="{{avatarUrl}}"></image>
+  <view class="login_form">
+     <text>请选择你的身份类型</text> 
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{type}}">
+      <view class="picker">
+        {{type[index]}}
+      </view>
+    </picker>
+    <button catchtap="login">下一步</button>
+  </view>
+</view>

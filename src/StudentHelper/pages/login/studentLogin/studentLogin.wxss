@@ -1,0 +1,25 @@
+.container{
+    text-align: center;
+}
+.avatarUrl{
+    border-radius: 50%;
+    margin-top: 200rpx;
+    width: 160rpx;
+    height: 160rpx;
+}
+.login_form{
+    padding-top: 60rpx;
+    margin: 0 60rpx;
+}
+input{
+    border-bottom: 1px solid #666666; 
+    margin-top: 30rpx;
+}
+button{
+    margin-top: 60rpx;
+    background: #5cb85c;
+    color: #ffffff;
+}
+radio-group{
+  margin-top: 20rpx;
+}

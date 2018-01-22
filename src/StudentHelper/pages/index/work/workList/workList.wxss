@@ -1,0 +1,113 @@
+.header{
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+    top: 0;
+}
+.search{
+    background: #0495fe;
+    padding: 10rpx;
+}
+.search_wrap{
+    width: 580rpx;
+    height: 36rpx;
+    margin: 0 auto;
+    position: relative;
+    background: #ffffff;
+    border-radius: 30rpx; 
+    padding: 12rpx 24rpx;
+}
+.search_wrap input{
+    position: absolute;
+    left: 72rpx;
+    top: 6rpx;
+    font-size: 32rpx;
+}
+.sort_items{
+    display: flex;
+    height: 88rpx;
+    background: #f2f2f2;
+    color: #b8b8b8;
+    font-size: 32rpx;
+}
+.sort_item{
+    flex: 1;
+    text-align: center;
+    line-height: 88rpx;
+}
+.sort_item .image{
+  display: inline-block;
+    height: 21rpx;
+    width: 30rpx;
+    position: relative;
+    /* top: 10rpx; */
+    left: 10rpx;
+    background-repeat: no-repeat;
+  background-size: 100%;
+}
+.sort_item .down{
+  background-image: url(https://wx.bingexxx.net/CollegeApp2.4/img/down.png);
+}
+.sort_item .up{
+  background-image: url(https://wx.bingexxx.net/CollegeApp2.4/img/up.png);
+}
+.job_wrap{
+  margin-top: 172rpx;
+}
+.job_list{
+    height: 225rpx;
+    padding: 28rpx;
+    position: relative;
+    border-bottom: 1rpx solid #d6d6d6;
+}
+.job_list .job_name{
+    color: #ee724e;
+}
+.job_list  .shop_name{
+    line-height: 64rpx;
+    color: #646464;
+}
+.job_list  .sort_detail{
+    height: 64rpx;
+    width: 100%;
+    color: #86858a;
+}
+.job_list  .sort_detail view{
+    float: left;
+    margin-right: 8rpx;
+}
+.job_list  .sort_detail image{
+    height: 32rpx;
+    width: 36rpx;
+    position: relative;
+    top: 7rpx;
+}
+.job_list .time{
+    color: #c8c7cc;
+}
+.salary{
+    color: #0495fe;
+    position: absolute;
+    top: 96rpx;
+    right: 20rpx;
+}
+.item_list{
+  background: #f8f8f8;
+  padding-bottom: 40rpx;
+  padding-left: 52rpx;
+  padding-right: 52rpx;
+  display: none;
+}
+.list{
+  height: 80rpx;
+  border-bottom: 1rpx solid #d6d6d6;
+  line-height: 80rpx;
+  text-align: center;
+}
+.show{
+  display: block !important;
+}
+.box{
+  margin-top: 400rpx;
+  display: none;
+}

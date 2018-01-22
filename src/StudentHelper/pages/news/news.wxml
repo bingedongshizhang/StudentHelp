@@ -1,0 +1,78 @@
+<view class="container">
+  <view class="tabItems">
+    <view class="tab {{current==0?'active':''}}" bindtap="tap">
+      <text>个人消息</text>
+    </view>
+    <view class="tab {{current==1?'active':''}}" bindtap="tap2">
+      <text>系统消息</text>
+    </view>
+  </view>
+  <view class="bg"></view>
+  <swiper bindchange="swiper" current="{{current}}">
+    <swiper-item>
+      <scroll-view scroll-y style="height: 920rpx;">
+        <view class="lists" wx:for="{{person}}">
+          <view class="list" bindtap="nav_to"  data-studyid="{{item.studyid}}">
+            <view class="header">
+              <image class="icon" src="https://wx.bingexxx.net/CollegeApp2.4/{{item.icon}}"></image>
+              <view class="nickName">{{item.nickname}}</view>
+              <view class="time">20{{item.time}}</view>
+            </view>
+            <view class="detail-body">
+              <view class="detail-content">
+                {{item.content}}
+              </view>
+              <image src="https://wx.bingexxx.net/CollegeApp2.4/{{item.url}}" />
+            </view>
+          </view>
+        </view>
+        <view class="box {{boxShow1?'show':''}}">
+          <image src="/images/box.png" />
+          <text>暂无内容</text>
+        </view>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <scroll-view scroll-y style="height: 960rpx;" id="system" style="height: 920rpx;">
+        <view class="lists" wx:for="{{system}}">
+          <view class="list">
+            <view class="title">{{item.title}}</view>
+            <view class="content">{{item.content}}</view>
+          </view>
+        </view>
+        <view class="box {{boxShow2?'show':''}}">
+          <image src="/images/box.png" />
+          <text>暂无内容</text>
+        </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+  <!-- <view class="lists">
+    <view class="list">
+      <view class="header">
+        <image class="icon" src="/images/test_1.jpg"></image>
+        <view class="nickName">好男人</view>
+        <view class="time">2017/07/05</view>
+      </view>
+      <view class="detail-body">
+        <view class="detail-content">
+          点这一整个范围，就会跳到之前学霸论坛的详情评论页，对这条评论进行回复。
+        </view>
+        <image src='/images/test_1.jpg' />
+      </view>
+    </view>
+    <view class="list">
+      <view class="header">
+        <image class="icon" src="/images/test_1.jpg"></image>
+        <view class="nickName">好男人</view>
+        <view class="time">2017/07/05</view>
+      </view>
+      <view class="detail-body">
+        <view class="detail-content">
+          haha
+        </view>
+        <image src='/images/test_1.jpg' />
+      </view>
+    </view>
+  </view> -->
+</view>

@@ -1,0 +1,45 @@
+<view class="container">
+  <view class="box {{boxShow?'show':''}}">
+    <image src="/images/box.png" />
+    <text>暂无内容</text>
+  </view>
+  <view class="lists" wx:for="{{lists}}">
+    <view class="list" bindtap="nav_to" data-studyId="{{item.studyId}}">
+      <view class="header">
+        <image class="icon" src="{{item.icon}}"></image>
+        <view class="nickName">{{item.nick}}</view>
+        <view class="time">20{{item.time}}</view>
+      </view>
+      <view class="title">{{item.content}}</view>
+      <view class="list_body clearfloat" catchtap="previewPictures" data-pictures="{{item.pictures}}">
+        <view class="img_wrap" wx:for="{{item.pictures}}">
+          <image src="{{item}}" bindtap="previewPicture" data-curPicture="{{item}}"></image>
+        </view>
+
+      </view>
+      <view class="footer">
+        <view class="footer_item">
+          <image src="/images/collect.png" class="{{item.iscollect?'none':''}}" catchtap="oper" data-studyId="{{item.studyId}}" data-code="collected"></image>
+          <image src="/images/collect_active.png" class="{{item.iscollect?'':'none'}}" catchtap="oper" data-studyId="{{item.studyId}}" data-code="uncollected"></image>
+          <text>{{item.collections}}</text>
+        </view>
+        <view class="footer_item">
+          <image src="/images/news_active.png"></image>
+          <text>{{item.comments}}</text>
+        </view>
+        <view class="footer_item">
+          <image src="/images/like.png" class="{{item.islike?'none':''}}" catchtap="oper" data-studyId="{{item.studyId}}" data-code="like"></image>
+          <image src="/images/like_active.png" class="{{item.islike?'':'none'}}" catchtap="oper" data-studyId="{{item.studyId}}" data-code="unlike"></image>
+          <text>{{item.like}}</text>
+        </view>
+      </view>
+    </view>
+
+  </view>
+  <view class="publish" bindtap="nav_toSend">
+    <view class="line1"></view>
+    <view class="line2"></view>
+  </view>
+  <view class="picture">
+  </view>
+</view>

@@ -1,0 +1,14 @@
+<view class="container">
+<view class="introduce">
+    <view class="list">
+      <image src="/images/edit.png" />
+      <text>意见反馈</text>
+    </view>
+    <textarea bindinput="textarea" />
+  </view>
+  <button bindtap="send">提交</button>
+  <!-- <view class="input">
+    <textarea placeholder="你每一个宝贵的建议都会成为我们前进的动力哦~" auto-focus  bindinput="textarea" />
+    <button type="primary"  bindtap="send" >提交</button>
+  </view> -->
+</view>

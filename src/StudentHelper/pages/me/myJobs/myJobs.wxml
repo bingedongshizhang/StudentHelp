@@ -1,0 +1,58 @@
+<view class="container">
+  <view class="tabItems">
+    <view class="tab {{current==0?'active':''}}" bindtap="tap" data-code="0">
+      <text>未录用</text>
+    </view>
+    <view class="tab {{current==1?'active':''}}" bindtap="tap" data-code="1">
+      <text>已录用</text>
+    </view>
+  </view>
+  <view class="bg"></view>
+  <swiper bindchange="swiper" current="{{current}}">
+    <swiper-item>
+      <scroll-view scroll-y style="height: 920rpx;">
+        <view class="lists">
+          <view class="list" wx:for="{{list1}}">
+            <view class="shop_name">{{item.shopname}}</view>
+            <view class="introduce">
+              <view class="introduce_title">我的简介: </view>
+              <view class="introduce_detail">{{item.introduce.detail}}</view>
+              <view class="status">
+                <image src="/images/fail.png" />
+                <view class="status_text">未录用</view>
+              </view>
+            </view>
+            <view class="time">投递于20{{item.time}}</view>
+          </view>
+
+        </view>
+        <view class="box {{boxShow1?'show':''}}">
+          <image src="/images/box.png" />
+          <text>暂无内容</text>
+        </view>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <scroll-view scroll-y style="height: 1000rpx;" id="system">
+        <view class="lists">
+          <view class="list" wx:for="{{list2}}">
+            <view class="shop_name">{{item.shopname}}</view>
+            <view class="introduce">
+              <view class="introduce_title">我的简介: </view>
+              <view class="introduce_detail">{{item.introduce.detail}}</view>
+              <view class="status">
+                <image src="/images/ok.png" />
+                <view class="status_text active">已录用</view>
+              </view>
+            </view>
+            <view class="time">投递于20{{item.time}}</view>
+          </view>
+        </view>
+        <view class="box {{boxShow2?'show':''}}">
+          <image src="/images/box.png" />
+          <text>暂无内容</text>
+        </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+</view>

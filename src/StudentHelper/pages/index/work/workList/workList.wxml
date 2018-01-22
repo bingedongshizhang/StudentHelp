@@ -1,0 +1,67 @@
+<view class="container">
+  <view class="box {{boxShow?'show':''}}">
+    <image src="/images/box.png" />
+    <text>暂无内容</text>
+  </view>
+  <view class="header">
+    <view class="search">
+      <view class="search_wrap">
+        <icon type="search" size="18" color="#0495fe" bindtap="find" />
+        <input type="text" placeholder="搜索" bindinput="bindInput" />
+      </view>
+    </view>
+    <view class="sort">
+      <view class="sort_items">
+        <view class="sort_item" bindtap="tap" data-tap="1">
+          <text>工作类型</text>
+          <view class="image {{tap!=1?'down':'up'}}"></view>
+        </view>
+        <view class="sort_item" bindtap="tap" data-tap="2">
+          <text>性别条件</text>
+          <view class="image {{tap!=2?'down':'up'}}"></view>
+        </view>
+        <!-- <view class="sort_item" bindtap="tap" data-tap="3">
+          <text>是否结束</text>
+          <view class="image {{tap!=3?'down':'up'}}"></view>
+        </view> -->
+      </view>
+    </view>
+    <view class="item_lists">
+      <view class="item_list {{tap==1?'show':''}}">
+        <view class="list" bindtap="select" data-type="type" data-code="短期招聘">短期招聘</view>
+        <view class="list" bindtap="select" data-type="type" data-code="长期期招聘">长期期招聘</view>
+        <view class="list" bindtap="select" data-type="type" data-code="2">不限</view>
+      </view>
+      <view class="item_list {{tap==2?'show':''}}">
+        <view class="list" bindtap="select" data-type="gender" data-code="只限男生">只限男生</view>
+        <view class="list" bindtap="select" data-type="gender" data-code="只限女生">只限女生</view>
+        <view class="list" bindtap="select" data-type="gender" data-code="男女不限">不限</view>
+      </view>
+      <!-- <view class="item_list {{tap==3?'show':''}}">
+        <view class="list" bindtap="select" data-type="status" data-code="0">正在进行</view>
+        <view class="list" bindtap="select" data-type="status" data-code="2">已经结束</view>
+      </view> -->
+    </view>
+  </view>
+  <view class="job_wrap">
+    <view class="job_lists" wx:for="{{lists}}">
+      <view class="job_list" bindtap="nav_to" data-jobid="{{item.jobid}}">
+        <view class="job_name">{{item.title}}</view>
+        <view class="shop_name">{{item.shopname}}</view>
+        <view class="sort_detail">
+          <view class="position">
+            <image src="/images/position.png"></image>
+            <text>{{item.detail.position}}</text>
+          </view>
+          <view class="gender">
+            <image src="/images/gender.png"></image>
+            <text>{{item.detail.gender}}</text>
+          </view>
+        </view>
+        <view class="time">20{{item.time}}</view>
+        <view class="salary">{{item.detail.salary}}</view>
+      </view>
+
+    </view>
+  </view>
+</view>

@@ -1,0 +1,93 @@
+.tabItems{
+    display: flex;
+}
+.tabItems .tab{
+    flex: 1;
+    text-align: center;
+}
+.tabItems text{
+    display: block;
+    width: 200rpx;
+    margin: 0 auto;
+    line-height: 90rpx;
+}
+.tabItems .active text{
+    color: #0495fe;
+    border-bottom: 5rpx #0495fe solid;
+}
+.bg{
+  height: 21rpx;
+  background: #e8e8e8;
+}
+swiper{
+  height: 1000rpx;
+}
+.lists{
+  padding-bottom: 5rpx;
+}
+.list{
+    /* height: 225rpx; */
+    padding: 28rpx;
+    position: relative;
+    border-bottom: 1rpx solid #d6d6d6;
+}
+.list .position{
+    color: #ee724e;
+}
+.list  .detail_text,.woker,.woker_phone{
+    line-height: 64rpx;
+    height: 64rpx;
+    color: #646464;
+}
+.list  .detail{
+    height: 64rpx;
+    width: 60%;
+    color: #86858a;
+}
+.list  .sort_detail view{
+    float: left;
+    margin-right: 8rpx;
+}
+.list .time{
+  position: absolute;
+  top: 21rpx;
+  right: 20rpx;
+    color: #c8c7cc;
+}
+.isfix{
+    color: #0495fe;
+    position: absolute;
+    top: 96rpx;
+    right: 20rpx;
+}
+
+.publish{
+    position: fixed;
+    bottom: 180rpx;
+    right: 72rpx;
+    background: #2ca6ff;
+    height: 128rpx;
+    width: 128rpx;
+    border-radius: 50%;
+}
+.line1,.line2{
+    position: absolute;
+    background: #ffffff;
+    border-radius: 4rpx;
+}
+.line1{
+    height: 72rpx;
+    width: 8rpx;
+    top: 30rpx;
+    left: 62rpx;
+}
+.line2{
+    width: 72rpx;
+    height: 8rpx;
+    left: 30rpx;
+    top: 62rpx;
+}
+.box{
+  margin-top: 240rpx;
+  display: none;
+}

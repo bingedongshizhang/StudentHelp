@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/index.css" rel="stylesheet">
+    <script src="js/vue.js"></script>
+    <script src="js/axios.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <div id="left">
+            <div class="list_header">
+                <div class="icon"></div>
+                <div class="icon_text">商店管理</div>
+            </div>
+            <div class="lists">
+                <div class="list" v-bind:class="{active: temp.status==0 || wrapLists[0].isShow}" v-on:click="tabChange(0)">正在进行</div>
+                <div class="list" v-bind:class="{active: temp.status==2 || wrapLists[1].isShow}" v-on:click="tabChange(1)">已经结束</div>
+            </div>
+
+        </div>
+        <div id="right">
+            <div id="tool_tar">
+                <div class="tool_item" v-on:click="changePassword">密码修改</div>
+                <div class="tool_item" v-on:click="logout">退出登录</div>
+            </div>
+
+            <div id="wrap">
+                <div id="wrap1" v-show="wrapLists[0].isShow">
+                    <div id="class_lists">
+                        <table class="table table-bordered">
+                            <h2>正在进行</h2>
+                            <thead>
+                                <tr class="success">
+                                    <th>兼职名</th>
+                                    <th>工作地点</th>
+                                    <th>工资</th>
+                                    <th>性别要求</th>
+                                    <th>工作类型</th>
+                                    <th>工作时间</th>
+                                    <th>发布时间</th>
+                                    <th>详情</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="item in wrapLists[0].initData">
+                                    <td v-text="item.title"></td>
+                                    <td v-text="item.detail.position"></td>
+                                    <td v-text="item.detail.salary"></td>
+                                    <td v-text="item.detail.gender"></td>
+                                    <td v-text="item.detail.type"></td>
+                                    <td v-text="item.detail.jobTime"></td>
+                                    <td v-text="item.time"></td>
+                                    <td>
+                                        <button type="button" class="btn btn-info" v-on:click="getDetail(item)">查看详情</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="wrap2" v-show="wrapLists[1].isShow">
+                    <div id="class_lists">
+                        <table class="table table-bordered">
+                            <h2>已经结束</h2>
+                            <thead>
+                                <tr class="success">
+                                    <th>兼职名</th>
+                                    <th>工作地点</th>
+                                    <th>工资</th>
+                                    <th>性别要求</th>
+                                    <th>工作类型</th>
+                                    <th>工作时间</th>
+                                    <th>发布时间</th>
+                                    <th>详情</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="item in wrapLists[1].initData">
+                                    <td v-text="item.title"></td>
+                                    <td v-text="item.detail.position"></td>
+                                    <td v-text="item.detail.salary"></td>
+                                    <td v-text="item.detail.gender"></td>
+                                    <td v-text="item.detail.type"></td>
+                                    <td v-text="item.detail.jobTime"></td>
+                                    <td v-text="item.time"></td>
+                                    <td>
+                                        <button type="button" class="btn btn-info" v-on:click="getDetail(item)">查看详情</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="wrap4" v-show="wrapLists[3].isShow">
+                    <div id="class_lists">
+                        <div class="detail">
+                            <div class="jobname">
+                                {{temp.title}}
+                            </div>
+                            <div class="myrow">
+                                <div class="salary">{{temp.detail.salary}}</div>
+                                <div class="type">{{temp.detail.type}}</div>
+                            </div>
+                            <div class="gender">性别要求: {{temp.detail.gender}}</div>
+                            <div class="jobtime">工作时间: {{temp.detail.jobTime}}</div>
+                            <div class="jobdetail">工作要求: {{temp.detail.detail}}</div>
+                            <div class="order">附加内容: {{temp.detail.other}}</div>
+                            <div class="time">发布于: 20{{temp.time}}</div>
+                            <button type="button" class="btn" v-bind:class="{active: temp.status!=0}" v-on:click="sureEnd(temp.jobid,temp.status)">{{temp.status==0?'结束招聘':'已经结束'}}</button>
+                        </div>
+                        <div class="introduceList">
+                            <div class="introduce" v-for="item in wrapLists[3].initData">
+                                <div class="introduce_detail">
+                                    <div class="introduce_row">
+                                        <div class="pot"></div>
+                                        <div class="nameAndGender">{{item.introduce.name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.introduce.gender}}</div>
+                                    </div>
+                                    <div class="introduce_row">
+                                        <div class="pot"></div>
+                                        <div class="phone">{{item.introduce.phone}}</div>
+                                    </div>
+                                    <div class="introduce_row">
+                                        <div class="pot"></div>
+                                        <div class="myinroduce">{{item.introduce.detail}}</div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn" v-on:click="recruit(item.introduceid,temp.status,item.status)" v-bind:class="{active: item.status!=0}">{{item.status==0?'招聘他':'已聘用'}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="publish" v-if="publishShow" data-toggle="modal" data-target=".bs-example-modal-lg">
+            发 布
+        </div>
+
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="infoLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="infoLabel">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>操作成功</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
+
+        <!-- 发布兼职信息 -->
+        <div class="modal fade bs-example-modal-lg" id="sell" tabindex="-1" role="dialog" aria-labelledby="sellLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="sellLabel">发布兼职招聘</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="left">
+                            <div class="form-group">
+                                <label for="title" class="control-label">兼职名</label>
+                                <div>
+                                    <input type="text" class="form-control" id="title" v-model="title">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="title" class="control-label">工作时间</label>
+                                <div>
+                                    <input type="text" class="form-control" id="title" v-model="detail.jobTime">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="title" class="control-label">招聘人数</label>
+                                <div>
+                                    <input type="text" class="form-control" id="title" v-model="detail.needNumber">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="title" class="control-label">工资</label>
+                                <div>
+                                    <input type="text" class="form-control" id="title" v-model="detail.salary">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="title" class="control-label">工作地点</label>
+                                <div>
+                                    <input type="text" class="form-control" id="title" v-model="detail.position">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="form-group">
+                                性别要求:
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" value="0" v-model="detail.gender" checked> 不限
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" value="1" v-model="detail.gender"> 男
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" value="2" v-model="detail.gender"> 女
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                工作类型:
+                                <label class="radio-inline">
+                                    <input type="radio" name="type" value="0" checked> 短期招聘
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="type" value="1"> 长期招聘
+                                </label>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="content" class="control-label">工作详情</label>
+                                <div>
+                                    <textarea class="form-control" rows="5" id="content" v-model="detail.detail"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="content" class="control-label">附加内容</label>
+                                <div>
+                                    <textarea class="form-control" rows="5" id="content" v-model="detail.other"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="publish">发布</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
+
+        <div class="modal fade bs-example-modal-sm" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="headLineLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="headLineLabel">修改密码</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h6>{{info}}</h6>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3"> 原 密 码 : </span>
+                            <input type="password" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="oldPassword">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3"> 新 密 码 : </span>
+                            <input type="password" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newPassword">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">再次确认: </span>
+                            <input type="password" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="surePassword">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" v-on:click="sureChange">确认修改</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
+
+    </div>
+</body>
+<script>
+    var app = new Vue({
+
+        el: "#app",
+
+        data: {
+            publishShow: true,
+            oldPassword: "",
+            info: "",
+            newPassword: "",
+            surePassword: "",
+            title: '服务员',
+            temp: {
+                title: '',
+                time: '',
+                detail: {
+                    salary: '',
+                    type: '',
+                    jobtime: '',
+                    gender: '',
+                    detail: '',
+                    other: ''
+                }
+            },
+            detail: {
+                jobTime: '19:00 至 22:00',
+                needNumber: '3人',
+                salary: '60元/小时',
+                position: '海大餐厅',
+                gender: 0,
+                type: 0,
+                detail: '有上进心, 能吃苦耐劳',
+                other: '不得无故缺席'
+            },
+            'wrapLists': [
+                {
+                    'isShow': true,
+                    'initData': {}
+                }, {
+                    'isShow': false,
+                    'initData': {}
+                }, {
+
+                }, {
+                    'isShow': false,
+                    'initData': {}
+                }
+            ],
+            position: 0
+        },
+        methods: {
+            tabChange: function (v) {
+                for (var i = 0; i < this.wrapLists.length; i++) {
+                    this.wrapLists[i].isShow = false;
+                }
+                this.wrapLists[v].isShow = true;
+                this.position = v;
+                if (v == 0) {
+                    this.loadWrap1();
+                } else if (v == 1) {
+                    this.loadWrap2();
+                }
+            },
+            loadWrap1: function () {
+                this.temp.status = 0;
+                var _this = this;
+                $.ajax({
+                    type: 'get',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/PartTimeAction.action?type=sellerid',
+                    data: {
+                        status: 0
+                    },
+                    success: function (data) {
+                        var data = JSON.parse(data)     //加中括号，否则传过来的花括号会被当成结束符
+                        if (!data.lists) {
+                            _this.wrapLists[0].initData = [];
+                            //空空如也
+                            return;
+                        }
+                        if (data.lists.detail) {
+                            var temp = [];
+                            temp.push(data.lists);
+                            data.lists = temp;
+                        }
+                        for (var i = 0; i < data.lists.length; i++) {
+                            data.lists[i].detail = JSON.parse(data.lists[i].detail)
+                            var gender = data.lists[i].detail.gender;
+                            if (gender == '0') {
+                                gender = '男女不限';
+                            } else if (gender == '1') {
+                                gender = '只限男生';
+                            } else if (gender == '2') {
+                                gender = '只限女生';
+                            }
+                            data.lists[i].detail.gender = gender;
+                            var type = data.lists[i].detail.type;
+                            if (type == '0') {
+                                type = '短期招聘';
+                            } else if (type == '1') {
+                                type = '长期招聘';
+                            }
+                            data.lists[i].detail.type = type;
+                        }
+                        _this.wrapLists[0].initData = data.lists;
+                        console.log(data.lists)
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+
+            },
+            loadWrap2: function () {
+                this.temp.status = 2;
+                var _this = this;
+                $.ajax({
+                    type: 'get',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/PartTimeAction.action?type=sellerid',
+                    data: {
+                        status: 2
+                    },
+                    success: function (data) {
+                        var data = JSON.parse(data)     //加中括号，否则传过来的花括号会被当成结束符
+                        if (!data.lists) {
+                            //空空如也
+                            return;
+                        }
+                        if (data.lists.detail) {
+                            var temp = [];
+                            temp.push(data.lists);
+                            data.lists = temp;
+                        }
+                        for (var i = 0; i < data.lists.length; i++) {
+                            data.lists[i].detail = JSON.parse(data.lists[i].detail)
+                            var gender = data.lists[i].detail.gender;
+                            if (gender == '0') {
+                                gender = '男女不限';
+                            } else if (gender == '1') {
+                                gender = '只限男生';
+                            } else if (gender == '2') {
+                                gender = '只限女生';
+                            }
+                            data.lists[i].detail.gender = gender;
+                            var type = data.lists[i].detail.type;
+                            if (type == '0') {
+                                type = '短期招聘';
+                            } else if (type == '1') {
+                                type = '长期招聘';
+                            }
+                            data.lists[i].detail.type = type;
+                        }
+                        console.log(data)
+                        _this.wrapLists[1].initData = data.lists;
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+
+            },
+            changePassword: function () {
+                this.newPassword = '';
+                this.oldPassword = '';
+                this.info = '';
+                this.surePassword = '';
+                $('#changePassword').modal('show');
+            },
+            sureChange: function () {
+                var _this = this;
+                if (this.newPassword != this.surePassword) {
+                    this.info = "两次输入的密码不一样";
+                    return;
+                }
+                var _this = this;
+                $.ajax({
+                    type: 'Post',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/MesChangeAction.action?changetype=sellerchange',
+                    data: {
+                        "surepassword": _this.oldPassword,
+                        "password": _this.newPassword
+                    },
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        if (data.code == 1) {
+                            alert('修改成功');
+                            $('#changePassword').modal('hide');
+                        } else {
+                            _this.info = "修改失败";
+                        }
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            },
+            publish: function () {
+                var _this = this;
+                var detail = {};
+                detail['jobTime'] = this.detail.jobTime;
+                detail['needNumber'] = this.detail.needNumber;
+                detail['salary'] = this.detail.salary;
+                detail['position'] = this.detail.position;
+                detail['gender'] = this.detail.gender;
+                detail['type'] = this.detail.type;
+                detail['detail'] = this.detail.detail;
+                detail['other'] = this.detail.other;
+
+                detail = JSON.stringify(detail);
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/PartTimeAction.action?type=sellersend',
+                    data: {
+                        title: this.title,
+                        detail: detail
+                    },
+                    success: function (data) {
+                        var data = JSON.parse(data)
+                        _this.tabChange(0);
+                        console.log(data)
+                        // _this.clear();
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            },
+            getDetail: function (item) {
+                var _this = this;
+                for (var i = 0; i < this.wrapLists.length; i++) {
+                    this.wrapLists[i].isShow = false;
+                }
+                this.wrapLists[3].isShow = true;
+                this.temp = item;
+                $.ajax({
+                    type: 'get',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/PartTimeAction.action?type=userjobid',
+                    data: {
+                        status: 1,
+                        jobid: item.jobid
+                    },
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        console.log(data)
+                        if (!data.lists) {
+                            _this.wrapLists[3].initData = [];
+                        } else {
+                            if (data.lists.time) {
+                                var temp = [];
+                                temp.push(data.lists);
+                                data.lists = temp;
+                            }
+                            for (var i = 0; i < data.lists.length; i++) {
+                                data.lists[i].introduce = JSON.parse(data.lists[i].introduce)
+                                var gender = data.lists[i].introduce.gender;
+                                if (gender == '0') {
+                                    gender = '男';
+                                } else if (gender == '1') {
+                                    gender = '女';
+                                }
+                                data.lists[i].introduce.gender = gender;
+                                var type = data.lists[i].introduce.type;
+                                if (type == '0') {
+                                    type = '短期招聘';
+                                } else if (type == '1') {
+                                    type = '长期招聘';
+                                }
+                                data.lists[i].introduce.type = type;
+                            }
+                            _this.wrapLists[3].initData = data.lists;
+                        }
+                        $.ajax({
+                            type: 'get',
+                            url: 'https://wx.bingexxx.net/CollegeApp2.4/PartTimeAction.action?type=userjobid',
+                            data: {
+                                status: 0,
+                                jobid: item.jobid
+                            },
+                            success: function (data) {
+                                var data = JSON.parse(data);
+                                console.log(data)
+                                if (!data.lists) {
+                                    // _this.wrapLists[3].initData = [];
+                                    return;
+                                }
+                                if (data.lists.time) {
+                                    var temp = [];
+                                    temp.push(data.lists);
+                                    data.lists = temp;
+                                }
+                                for (var i = 0; i < data.lists.length; i++) {
+                                    data.lists[i].introduce = JSON.parse(data.lists[i].introduce)
+                                    var gender = data.lists[i].introduce.gender;
+                                    if (gender == '0') {
+                                        gender = '男';
+                                    } else if (gender == '1') {
+                                        gender = '女';
+                                    }
+                                    data.lists[i].introduce.gender = gender;
+                                    var type = data.lists[i].introduce.type;
+                                    if (type == '0') {
+                                        type = '短期招聘';
+                                    } else if (type == '1') {
+                                        type = '长期招聘';
+                                    }
+                                    data.lists[i].introduce.type = type;
+                                }
+                                _this.wrapLists[3].initData = _this.wrapLists[3].initData.concat(data.lists);
+                            },
+                            xhrFields: {
+                                withCredentials: true
+                            },
+                            crossDomain: true
+                        });
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            },
+            sureEnd: function (jobid, status) {
+                if (status != 0) {
+                    alert('该招聘已经结束');
+                }
+                var _this = this;
+                $.ajax({
+                    type: 'get',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/PartTimeAction.action?type=sellerfinish',
+                    data: {
+                        jobid: jobid
+                    },
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        _this.temp.status = 2;
+                        // _this.loadWrap1();
+                        console.log(data)
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            },
+            recruit: function (introduceid, jobstatus, parttimestatus) {
+                var _this = this;
+                if (jobstatus == 2) {
+                    alert("该招聘已结束");
+                    return;
+                }
+                if (parttimestatus == 1) {
+                    alert("你已经聘用");
+                    return;
+                }
+                $.ajax({
+                    type: 'get',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/PartTimeAction.action?type=check',
+                    data: {
+                        introduceid: introduceid
+                    },
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        _this.getDetail(_this.temp)
+                        console.log(_this.temp);
+                        console.log(data)
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            },
+            logout: function () {
+                $.ajax({
+                    type: 'get',
+                    url: 'https://wx.bingexxx.net/CollegeApp2.4/LoginAction.action?logintype=5',
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        if (data.code == 1) {
+                            sessionStorage.shop = false;
+                            window.location.href = "login.html";
+                        }
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true
+                });
+            },
+            clear: function () {
+                this.title = '';
+                this.detail.jobTime = '';
+                this.detail.needNumber = '';
+                this.detail.salary = '';
+                this.detail.position = '';
+                this.detail.gender = '';
+                this.detail.type = '';
+                this.detail.detail = '';
+                this.detail.other = '';
+            }
+
+        },
+        created: function () {
+            if (sessionStorage.shop == 'false') {
+                console.log(1)
+                window.location.href = "login.html";
+            }
+            this.loadWrap1();
+        }
+    })
+</script>
+
+</html>

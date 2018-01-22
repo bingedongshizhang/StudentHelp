@@ -1,0 +1,151 @@
+.list{
+    background: #f8f8f8;
+}
+.header{
+    height: 135rpx;
+    position: relative;
+}
+.header .icon{
+    position: absolute;
+    top: 30rpx;
+    left: 28rpx;
+    height: 92rpx;
+    width: 92rpx;
+    border-radius: 50%; 
+}
+.header .nickName{
+    position: absolute;
+    left: 138rpx;
+    top: 36rpx;
+}
+.header .time{
+    position: absolute;
+    left: 138rpx;
+    top: 78rpx;
+    font-size: 32rpx;
+    color: #a8a8a8;
+}
+.title{
+    max-height: 120rpx;
+    margin-top: 8rpx;
+    padding: 0 28rpx;
+}
+.list_body{
+    padding-left: 18rpx;
+}
+.list_body image{
+    height: 200rpx;
+    width: 200rpx;
+    padding: 10rpx;
+    float: left;
+}
+.footer{
+    height: 75rpx;
+    display: flex;
+}
+.footer_item{
+    flex: 1;
+    text-align: center;
+    padding-top: 16rpx;
+}
+.footer_item image{
+    width: 36rpx;
+    height: 32rpx;
+    margin-bottom: -3rpx;
+}
+.footer_item text{
+    font-size: 32rpx;
+    line-height: 32rpx;
+    padding-left: 12rpx;
+}
+.blank{
+    height: 24rpx;
+    background: #e8e8e8;
+}
+.comments{
+    padding-bottom: 100rpx;
+}
+.comment{
+    position: relative;
+    margin: 0 28rpx;
+    border-bottom: 1rpx solid #d6d6d6;
+    padding-bottom: 20rpx;
+}
+.comment .icon{
+    position: absolute;
+    top: 15rpx;
+    height: 75rpx;
+    width: 75rpx;
+    border-radius: 50%; 
+}
+.comment .nickName{
+    position: absolute;
+    left: 96rpx;
+    top: 30rpx;
+    color: #5e83b7;
+}
+.comment .time{
+    position: absolute;
+    right: 0rpx;
+    top: 32rpx;
+    color: #b9b9b9;
+    font-size: 32rpx;
+}
+.comment .content{
+    padding: 90rpx 0 10rpx 96rpx;
+    font-size: 32rpx;
+}
+.publish{
+    z-index: 3;
+    position: fixed;
+    width: 100%;
+    padding: 0 28rpx;
+    bottom: 0;
+    background: #ffffff;
+    display: flex;
+}
+input{
+    height: 100rpx;
+    font-size: 32rpx;
+    line-height: 100rpx;
+    flex: 5;
+    background: #ffffff;
+}
+.placeholder{
+    background: #a8a8a8;
+    background: #ffffff;
+}
+.publish text{
+    flex: 1;
+    height: 100rpx;
+    font-size: 32rpx;
+    line-height: 100rpx;
+    color: #0495fe;
+}
+swiper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #000000;
+}
+swiper-item{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 800rpx;
+}
+.slide-image{
+    vertical-align: middle;
+    width: 100%;
+}
+.childComment{
+  margin-left: 86rpx;
+  background: #f8f8f8;
+  padding: 10rpx;
+  margin-right: 28rpx;
+  /* width: 300rpx; */
+}
+.none{
+  display: none;
+}
